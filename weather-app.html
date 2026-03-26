@@ -4,19 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeatherLens</title>
-
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- CSS FILE -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="weather-app-style.css">
 </head>
 <body>
-
 <div class="container">
 
     <!-- Header -->
@@ -60,6 +53,7 @@
     <!-- Weather Card -->
     <div id="weatherCard" class="weather-card glass hidden">
 
+        <!-- Hero -->
         <div class="weather-hero">
             <div class="location-info">
                 <h2 id="cityName">—</h2>
@@ -83,36 +77,68 @@
             </div>
         </div>
 
+        <!-- Detail Cards -->
         <div class="details-grid">
-            <div class="detail-card"><div class="d-icon"><i class="fas fa-droplet"></i></div><div class="d-label">Humidity</div><div class="d-value" id="humidity">—</div></div>
-            <div class="detail-card"><div class="d-icon"><i class="fas fa-wind"></i></div><div class="d-label">Wind Speed</div><div class="d-value" id="windSpeed">—</div></div>
-            <div class="detail-card"><div class="d-icon"><i class="fas fa-gauge-high"></i></div><div class="d-label">Pressure</div><div class="d-value" id="pressure">—</div></div>
-            <div class="detail-card"><div class="d-icon"><i class="fas fa-eye"></i></div><div class="d-label">Visibility</div><div class="d-value" id="visibility">—</div></div>
-            <div class="detail-card"><div class="d-icon"><i class="fas fa-cloud"></i></div><div class="d-label">Cloudiness</div><div class="d-value" id="clouds">—</div></div>
-            <div class="detail-card"><div class="d-icon"><i class="fas fa-compass"></i></div><div class="d-label">Wind Dir</div><div class="d-value" id="windDir">—</div></div>
-            <div class="detail-card"><div class="d-icon"><i class="fas fa-sun"></i></div><div class="d-label">Sunrise</div><div class="d-value" id="sunrise">—</div></div>
-            <div class="detail-card"><div class="d-icon"><i class="fas fa-moon"></i></div><div class="d-label">Sunset</div><div class="d-value" id="sunset">—</div></div>
+            <div class="detail-card">
+                <div class="d-icon"><i class="fas fa-droplet"></i></div>
+                <div class="d-label">Humidity</div>
+                <div class="d-value" id="humidity">—</div>
+            </div>
+            <div class="detail-card">
+                <div class="d-icon"><i class="fas fa-wind"></i></div>
+                <div class="d-label">Wind Speed</div>
+                <div class="d-value" id="windSpeed">—</div>
+            </div>
+            <div class="detail-card">
+                <div class="d-icon"><i class="fas fa-gauge-high"></i></div>
+                <div class="d-label">Pressure</div>
+                <div class="d-value" id="pressure">—</div>
+            </div>
+            <div class="detail-card">
+                <div class="d-icon"><i class="fas fa-eye"></i></div>
+                <div class="d-label">Visibility</div>
+                <div class="d-value" id="visibility">—</div>
+            </div>
+            <div class="detail-card">
+                <div class="d-icon"><i class="fas fa-cloud"></i></div>
+                <div class="d-label">Cloudiness</div>
+                <div class="d-value" id="clouds">—</div>
+            </div>
+            <div class="detail-card">
+                <div class="d-icon"><i class="fas fa-compass"></i></div>
+                <div class="d-label">Wind Dir</div>
+                <div class="d-value" id="windDir">—</div>
+            </div>
+            <div class="detail-card">
+                <div class="d-icon"><i class="fas fa-sun"></i></div>
+                <div class="d-label">Sunrise</div>
+                <div class="d-value" id="sunrise">—</div>
+            </div>
+            <div class="detail-card">
+                <div class="d-icon"><i class="fas fa-moon"></i></div>
+                <div class="d-label">Sunset</div>
+                <div class="d-value" id="sunset">—</div>
+            </div>
         </div>
 
+        <!-- 5-Day Forecast -->
         <div class="forecast-wrap">
             <p class="section-title"><i class="fas fa-calendar-days"></i> &nbsp;5-Day Forecast</p>
             <div class="forecast-grid" id="forecastGrid"></div>
         </div>
     </div>
 
+    <!-- Recent Searches -->
     <div id="recentSection" class="recent-section glass hidden">
-        <p class="section-title"><i class="fas fa-clock-rotate-left"></i> &nbsp;Recent Searches</p>
+        <p class="section-title" style="margin-bottom:12px;"><i class="fas fa-clock-rotate-left"></i> &nbsp;Recent Searches</p>
         <div class="recent-list" id="recentList"></div>
     </div>
 
 </div>
 
 <footer>
-    <p>Powered by OpenWeatherMap · Last updated: <span id="lastUpdate">—</span></p>
+    <p>Powered by OpenWeatherMap &nbsp;·&nbsp; Last updated: <span id="lastUpdate">—</span></p>
 </footer>
-
-<!-- JS FILE -->
-<script src="script.js"></script>
-
+<script src="weather-app-script.js"></script>
 </body>
 </html>
