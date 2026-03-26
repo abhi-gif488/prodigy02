@@ -3,161 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Forecast App</title>
-    <link rel="stylesheet" href="weather-app-styles.css">
+    <title>WeatherLens</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS FILE -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="app-header">
-            <h1 class="app-title">
-                <i class="fas fa-cloud-sun"></i>
-                Weather Forecast
-            </h1>
-            <p class="app-subtitle">Real-time weather updates worldwide</p>
-        </header>
 
-        <!-- Search Section -->
-        <div class="search-section">
-            <div class="search-box">
+<div class="container">
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="logo-wrap">
+            <div class="logo-icon"><i class="fas fa-cloud-sun"></i></div>
+            <h1 class="app-title">WeatherLens</h1>
+        </div>
+        <p class="app-subtitle">Real-time weather, anywhere in the world</p>
+    </header>
+
+    <!-- Search -->
+    <div class="search-section glass">
+        <div class="search-row">
+            <div class="search-input-wrap">
                 <i class="fas fa-search"></i>
-                <input 
-                    type="text" 
-                    id="cityInput" 
-                    placeholder="Enter city name (e.g., London, Tokyo, Paris)"
-                    autocomplete="off"
-                >
-                <button id="searchBtn" class="btn-search">
-                    Search
-                </button>
+                <input type="text" id="cityInput" placeholder="Search city — London, Tokyo, Mumbai…" autocomplete="off">
             </div>
-            <button id="locationBtn" class="btn-location">
-                <i class="fas fa-location-arrow"></i>
-                Use My Location
+            <button id="searchBtn" class="btn-search">
+                <i class="fas fa-arrow-right"></i> Search
             </button>
         </div>
+        <button id="locationBtn" class="btn-location">
+            <i class="fas fa-location-crosshairs"></i>
+            Use My Location
+        </button>
+    </div>
 
-        <!-- Loading -->
-        <div id="loading" class="loading hidden">
-            <div class="spinner"></div>
-            <p>Loading weather data...</p>
-        </div>
+    <!-- Loading -->
+    <div id="loading" class="loading glass hidden">
+        <div class="pulse-ring"><div class="inner"></div></div>
+        <p>Fetching weather data…</p>
+    </div>
 
-        <!-- Error Message -->
-        <div id="error" class="error-box hidden">
-            <i class="fas fa-exclamation-circle"></i>
-            <p id="errorText"></p>
-        </div>
+    <!-- Error -->
+    <div id="errorBox" class="error-box hidden">
+        <i class="fas fa-circle-exclamation"></i>
+        <p id="errorText">Something went wrong.</p>
+    </div>
 
-        <!-- Weather Display -->
-        <div id="weatherCard" class="weather-card hidden">
-            <!-- Main Weather Info -->
-            <div class="weather-main">
-                <div class="location-date">
-                    <h2 id="cityName">London</h2>
-                    <p id="currentDate">Monday, Feb 04, 2024</p>
-                    <p id="currentTime">12:00 PM</p>
-                </div>
+    <!-- Weather Card -->
+    <div id="weatherCard" class="weather-card glass hidden">
 
-                <div class="temp-display">
-                    <img id="weatherIcon" src="" alt="weather">
-                    <div class="temp-info">
-                        <div class="temperature">
-                            <span id="temp">22</span>°
-                            <div class="unit-toggle">
-                                <button class="unit-btn active" data-unit="C">C</button>
-                                <button class="unit-btn" data-unit="F">F</button>
-                            </div>
-                        </div>
-                        <p id="description">Clear Sky</p>
-                        <p class="feels-like">Feels like <span id="feelsLike">20</span>°</p>
-                    </div>
-                </div>
+        <div class="weather-hero">
+            <div class="location-info">
+                <h2 id="cityName">—</h2>
+                <p class="date" id="currentDate">—</p>
+                <p class="time" id="currentTime">—</p>
             </div>
-
-            <!-- Weather Details -->
-            <div class="weather-details">
-                <div class="detail-item">
-                    <i class="fas fa-tint"></i>
-                    <div>
-                        <p class="label">Humidity</p>
-                        <p id="humidity" class="value">65%</p>
+            <div class="weather-core">
+                <img id="weatherIcon" src="" alt="">
+                <div class="temp-block">
+                    <div class="temp-line">
+                        <span class="temp-value" id="tempVal">—</span>
+                        <span class="temp-deg">°</span>
                     </div>
-                </div>
-                <div class="detail-item">
-                    <i class="fas fa-wind"></i>
-                    <div>
-                        <p class="label">Wind Speed</p>
-                        <p id="windSpeed" class="value">12 km/h</p>
+                    <div class="unit-toggle">
+                        <button class="unit-btn active" data-unit="C">°C</button>
+                        <button class="unit-btn" data-unit="F">°F</button>
                     </div>
-                </div>
-                <div class="detail-item">
-                    <i class="fas fa-gauge"></i>
-                    <div>
-                        <p class="label">Pressure</p>
-                        <p id="pressure" class="value">1013 hPa</p>
-                    </div>
-                </div>
-                <div class="detail-item">
-                    <i class="fas fa-eye"></i>
-                    <div>
-                        <p class="label">Visibility</p>
-                        <p id="visibility" class="value">10 km</p>
-                    </div>
-                </div>
-                <div class="detail-item">
-                    <i class="fas fa-cloud"></i>
-                    <div>
-                        <p class="label">Cloudiness</p>
-                        <p id="clouds" class="value">20%</p>
-                    </div>
-                </div>
-                <div class="detail-item">
-                    <i class="fas fa-compass"></i>
-                    <div>
-                        <p class="label">Wind Direction</p>
-                        <p id="windDir" class="value">NE</p>
-                    </div>
-                </div>
-                <div class="detail-item">
-                    <i class="fas fa-sunrise"></i>
-                    <div>
-                        <p class="label">Sunrise</p>
-                        <p id="sunrise" class="value">6:30 AM</p>
-                    </div>
-                </div>
-                <div class="detail-item">
-                    <i class="fas fa-sunset"></i>
-                    <div>
-                        <p class="label">Sunset</p>
-                        <p id="sunset" class="value">8:45 PM</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 5-Day Forecast -->
-            <div class="forecast-section">
-                <h3><i class="fas fa-calendar-week"></i> 5-Day Forecast</h3>
-                <div id="forecast" class="forecast-grid">
-                    <!-- Forecast items will be inserted here -->
+                    <p class="weather-desc" id="description">—</p>
+                    <p class="feels-like">Feels like <span id="feelsLike">—</span>°</p>
                 </div>
             </div>
         </div>
 
-        <!-- Recent Searches -->
-        <div id="recentSection" class="recent-section hidden">
-            <h3><i class="fas fa-history"></i> Recent Searches</h3>
-            <div id="recentList" class="recent-list">
-                <!-- Recent cities will be added here -->
-            </div>
+        <div class="details-grid">
+            <div class="detail-card"><div class="d-icon"><i class="fas fa-droplet"></i></div><div class="d-label">Humidity</div><div class="d-value" id="humidity">—</div></div>
+            <div class="detail-card"><div class="d-icon"><i class="fas fa-wind"></i></div><div class="d-label">Wind Speed</div><div class="d-value" id="windSpeed">—</div></div>
+            <div class="detail-card"><div class="d-icon"><i class="fas fa-gauge-high"></i></div><div class="d-label">Pressure</div><div class="d-value" id="pressure">—</div></div>
+            <div class="detail-card"><div class="d-icon"><i class="fas fa-eye"></i></div><div class="d-label">Visibility</div><div class="d-value" id="visibility">—</div></div>
+            <div class="detail-card"><div class="d-icon"><i class="fas fa-cloud"></i></div><div class="d-label">Cloudiness</div><div class="d-value" id="clouds">—</div></div>
+            <div class="detail-card"><div class="d-icon"><i class="fas fa-compass"></i></div><div class="d-label">Wind Dir</div><div class="d-value" id="windDir">—</div></div>
+            <div class="detail-card"><div class="d-icon"><i class="fas fa-sun"></i></div><div class="d-label">Sunrise</div><div class="d-value" id="sunrise">—</div></div>
+            <div class="detail-card"><div class="d-icon"><i class="fas fa-moon"></i></div><div class="d-label">Sunset</div><div class="d-value" id="sunset">—</div></div>
+        </div>
+
+        <div class="forecast-wrap">
+            <p class="section-title"><i class="fas fa-calendar-days"></i> &nbsp;5-Day Forecast</p>
+            <div class="forecast-grid" id="forecastGrid"></div>
         </div>
     </div>
 
-    <footer class="footer">
-        <p>Powered by OpenWeatherMap API | Last updated: <span id="lastUpdate">--</span></p>
-    </footer>
+    <div id="recentSection" class="recent-section glass hidden">
+        <p class="section-title"><i class="fas fa-clock-rotate-left"></i> &nbsp;Recent Searches</p>
+        <div class="recent-list" id="recentList"></div>
+    </div>
 
-    <script src="weather-app-script.js"></script>
+</div>
+
+<footer>
+    <p>Powered by OpenWeatherMap · Last updated: <span id="lastUpdate">—</span></p>
+</footer>
+
+<!-- JS FILE -->
+<script src="script.js"></script>
+
 </body>
 </html>
